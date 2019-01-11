@@ -2,11 +2,6 @@ L.mapbox.accessToken = 'pk.eyJ1IjoibWF4d2VsbDg4ODgiLCJhIjoiY2pqcHJpbnF6MDhzMDN3c
 var map = L.mapbox.map('map', 'mapbox.light')
     .setView([40, -96], 4);
 
-// Be nice and credit our data source, Census Reporter.
-map.attributionControl.addAttribution('Data from ' +
-  '<a href="http://censusreporter.org/data/map/?table=B06011&geo_ids=040%7C01000US#">' +
-  'Census Reporter</a>');
-
 // Choropleth colors from http://colorbrewer2.org/
 // You can choose your own range (or different number of colors)
 // and the code will compensate.
@@ -45,7 +40,7 @@ for (var i = 0; i < variables.length; i++) {
 // Create a layer of state features, and when it's done
 // loading, run loadData
 var usLayer = L.mapbox.featureLayer()
-    .loadURL('/static/data/us.geojson')
+    .loadURL('/static/data/Travel_to_Work_Areas_2011.geojson')
     .addTo(map)
     .on('ready', loadData);
 
