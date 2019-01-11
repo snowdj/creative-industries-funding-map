@@ -1,6 +1,6 @@
 L.mapbox.accessToken = 'pk.eyJ1IjoibWF4d2VsbDg4ODgiLCJhIjoiY2pqcHJpbnF6MDhzMDN3cDRubGJuMzBsayJ9.bA38eIQYmV3OMpwgeeb2Dg';
 var map = L.mapbox.map('map', 'mapbox.light')
-    .setView([40, -96], 4);
+    .setView([53, -4], 6);
 
 // Choropleth colors from http://colorbrewer2.org/
 // You can choose your own range (or different number of colors)
@@ -24,7 +24,7 @@ var variables = [
 var ranges = {};
 var $select = $('<select></select>')
     .appendTo($('#variables'))
-    .on('change', function() {
+    .on('change', function () {
         setVariable($(this).val());
     });
 for (var i = 0; i < variables.length; i++) {
@@ -49,31 +49,34 @@ var usLayer = L.mapbox.featureLayer()
 // http://shancarter.github.io/mr-data-converter/
 function loadData() {
     $.getJSON('/static/data/censusdata.json')
-        .done(function(data) {
+        .done(function (data) {
             joinData(data, usLayer);
         });
 }
 
 function joinData(data, layer) {
     // First, get the US state GeoJSON data for reference.
+
+    // get geojson
     var usGeoJSON = usLayer.getGeoJSON(),
         byState = {};
 
     // Rearrange it so that instead of being a big array,
     // it's an object that is indexed by the state name,
     // that we'll use to join on.
+
+    // bystate is geojson but with each feature named
     for (var i = 0; i < usGeoJSON.features.length; i++) {
         byState[usGeoJSON.features[i].properties.name] =
             usGeoJSON.features[i];
     }
+
+    // add data for each state to properties, replacing the GeoJSON feature properties with the full data.
     for (i = 0; i < data.length; i++) {
-        // Match the GeoJSON data (byState) with the tabular data
-        // (data), replacing the GeoJSON feature properties
-        // with the full data.
         byState[data[i].name].properties = data[i];
+
+        // for each measure, add min and max of data to ranges obj
         for (var j = 0; j < variables.length; j++) {
-            // Simultaneously build the table of min and max
-            // values for each attribute.
             var n = variables[j];
             ranges[n].min = Math.min(data[i][n], ranges[n].min);
             ranges[n].max = Math.max(data[i][n], ranges[n].max);
@@ -81,29 +84,33 @@ function joinData(data, layer) {
     }
     // Create a new GeoJSON array of features and set it
     // as the new usLayer content.
+
+    // convert bystate obj to an array
     var newFeatures = [];
     for (i in byState) {
         newFeatures.push(byState[i]);
     }
+
+    // set newfeatures as new uslayer content
     usLayer.setGeoJSON(newFeatures);
-    // Kick off by filtering on an attribute.
+
+    // pick the first measure to be displayed
     setVariable(variables[0]);
 }
 
-// Excuse the short function name: this is not setting a JavaScript
-// variable, but rather the variable by which the map is colored.
-// The input is a string 'name', which specifies which column
-// of the imported JSON file is used to color the map.
+// color the map.
 function setVariable(name) {
     var scale = ranges[name];
-    usLayer.eachLayer(function(layer) {
+    console.log(scale);
+
+    usLayer.eachLayer(function (layer) {
         // Decide the color for each state by finding its
         // place between min & max, and choosing a particular
         // color as index.
         var division = Math.floor(
             (hues.length - 1) *
             ((layer.feature.properties[name] - scale.min) /
-            (scale.max - scale.min)));
+                (scale.max - scale.min)));
         // See full path options at
         // http://leafletjs.com/reference.html#path
         layer.setStyle({
@@ -111,5 +118,22 @@ function setVariable(name) {
             fillOpacity: 0.8,
             weight: 0.5
         });
+
+        var maxslegend = '';
+        for (var i = 0; i < hues.length; i++) {
+            var val = '';
+            if (i==0) {
+                val = scale['min']
+            }
+            if (i==hues.length - 1) {
+                val = scale['max']
+            }
+
+            maxslegend +=
+
+                '<div style="dispay: inline"><div style="background:' + hues[i] + '; height: 30px; width: 60px;">' + val + '</div>' + '<div>' + '' + '</div></div>';
+        }
+        console.log(maxslegend);
+        map.legendControl.addLegend(maxslegend);
     });
 }
