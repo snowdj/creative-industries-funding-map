@@ -1,0 +1,344 @@
+body {
+    color: rgb(36, 41, 46);
+    font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /* font-family: cursive; */
+    font-size: 14px;
+  }
+h2 {
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+h4 {
+  font-size: 15px;
+  margin-bottom: 8px;
+  margin-top: 30px;
+  font-weight: 800;
+}
+
+hr {
+  margin: 15px 0 15px 0;
+}
+a, a:visited {
+  color: #ce4b99;
+}
+a:hover { 
+  text-decoration: underline;
+  color: #ce4b99;
+  /* color: inherit; */
+}
+
+.collapsible {
+  /* background-color: #777; */
+  color: #ce4b99;
+  cursor: pointer;
+}
+
+.active, .collapsible:hover {
+  /* background-color: #555; */
+}
+.collapsible:after {
+  /* content: '\002B'; */
+  content: '\25BC';
+}
+
+.active:after {
+  /* content: "\2212"; */
+  content: '\25B2';
+}
+
+.content {
+  margin-top: 12px;
+  display: none;
+  overflow: hidden;
+  background: rgb(250, 250, 250);
+  padding: 15px 15px 0 15px;
+}
+.content p {
+  margin-bottom: 30px;
+}
+
+select {
+    font: inherit;
+}
+.widget {
+    padding: 30px;
+}
+
+  #navbar {
+    background-color: white;
+    color: rgb(50, 49, 50);
+    height: 120px;
+    /* position: fixed; */
+    /* top: 0; */
+    /* transition: top 0.5s ease-in-out; */
+    width: 100%;
+    padding: 10px 0 0 10px;
+    margin-bottom: 50px;
+    grid-area: navbar;
+    display: flex;
+    /* align-content: space-between; */
+  }
+  #dcms-logo {
+    /* grid-area: dcms-logo; */
+    margin-right: 130px;
+    /* max-width: 100%; */
+}
+#dcms-logo img{
+    /* height: 100px;
+    width: 145px; */
+    max-width: 90%;
+    max-height: 90%;
+  }
+  #header-text {
+    /* grid-area: header-text; */
+    font-size: 30px;
+    font-weight: 1;
+    align-self: center;
+  }
+  
+  #wrapper {
+    grid-area: wrapper;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "navbar"
+    "main"
+    "footer";
+    /* grid-gap: 200px; */
+    align-items: center;
+    justify-items: center;
+    
+  }
+
+  #main {
+      /* border: solid red 5px; */
+      grid-area: main;
+      display: grid;
+      grid-gap: 50px;
+      width: 960px;
+  }
+
+#leaderboard {
+  /* width: 1000px; */
+  height: 850px;
+}
+.widget-graphic {   
+}
+.methodology-note {
+  margin-top: 30px;
+  margin-bottom: -10px;
+}
+.source-links {
+  margin-top: 30px;
+}
+
+/* leaflet */
+#map { 
+    height: 730px;
+    width: 960px;
+    background: none;
+}
+
+#ts { 
+  height: 400px;
+  width: 960px;
+}
+
+
+/* info box */
+.info {
+  padding: 6px 8px;
+  font: 14px/16px Arial, Helvetica, sans-serif;
+  background: white;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+
+
+/* widget controls */
+.chart-controls {
+  display: flex;
+  align-items: flex-start;
+  /* justify-items: space-between; */
+  margin: 0 -20px 10px -20px;
+}
+
+.chart-controls button {
+  margin: 0 20px;
+}
+.chart-controls div {
+  margin: 0 20px !important;
+}
+.chart-controls select {
+  margin: 0 20px !important;
+}
+
+
+
+button {
+  display: inline-block;
+ height: 38px;
+  padding: 0 30px;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-radius: 4px;
+  border: 1px solid rgb(204, 204, 204);
+  box-sizing: border-box;
+}
+
+button:hover,
+button:focus {
+  color: #333;
+  border-color: #888;
+  outline: 0; 
+}
+    
+    button.on {
+      color: rgb(0, 126, 255);
+      background-color: rgba(0, 126, 255, 0.08);
+    }
+    button.off {
+      color: rgb(204, 204, 204);
+      background-color: white;
+    }
+
+    
+/* .c3-circles-BRITISH-MUSEUM_MA {
+  display: none;
+} */
+    
+/* C3 */
+/* legend */
+.legend {
+  line-height: 18px;
+  color: #555;
+}
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+
+  label{
+    margin-right: 20px;
+  }
+  
+  #tsChartMeasureTypes {
+    margin: 10px 0 0 2px;
+  }
+
+  .c3-legend-item
+{
+pointer-events: none;
+}
+  
+
+/* circle css */
+.chart-text {
+}
+
+.legend {
+    /* border: 5px solid red; */
+}
+
+.c3-axis-y text, .c3-axis-x text, .c3-legend-item text {
+  font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+}
+.c3-legend-item {
+  margin: 0 50px 0 50px;
+}
+
+/* table.c3-tooltip{
+  font-size:150px;
+  } */
+
+  /* .c3-tooltip td {
+    font-size:13px;
+    padding: 3px 6px;
+    background-color:red;
+    border-left:1px dotted #999;
+    color: #000;
+    } */
+
+
+    .c3-xgrid-line line {
+      stroke: rgb(102, 102, 102);
+  }
+
+/* font color */
+.c3-axis .tick {
+  fill: rgb(102, 102, 102);
+}
+.c3-ygrids .c3-ygrid {
+  /* stroke-dasharray: 20 !important; */
+  stroke-dasharray: 99999;
+  stroke: rgb(230, 230, 230);
+}
+
+#chart .c3-line {
+  stroke-width: 2px;
+}
+
+/* y axis */
+.c3-axis-y .domain {
+  display: none;
+}
+.c3-axis-y .tick line {
+  display: none;
+}
+
+/* x axis */
+.c3-axis-x .domain {
+  stroke: rgb(204, 214, 235);
+}
+.c3-axis-x .tick line {
+  stroke: rgb(204, 214, 235);
+}
+.c3-axis .tick line {display: none;}
+
+
+footer {
+    grid-area: footer;
+    width: 100%;
+    background: rgb(222, 224, 226);
+    color: rgb(111, 119, 123);
+    border-top: 1px solid rgb(191, 193, 195);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    margin-top: 80px;
+    vertical-align: middle;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: start; */
+  }
+  footer img {
+    margin: 0 5px 0 0;
+    height: 17px;
+    width: 40px;
+  }
+  footer p {
+    margin: 10px 0 10px 0;
+  }
+  footer a {
+    /* color: red; */
+    text-decoration: underline;
+  }
+  a:hover { 
+    text-decoration: none; 
+    /* color: inherit; */
+  }

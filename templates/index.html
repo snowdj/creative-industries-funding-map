@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Creative Industries Funding Map</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- leafletjs -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/leaflet.css') }}">
+    <script src="{{ url_for('static', filename='js/leaflet.js') }}"></script>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+        crossorigin=""></script> -->
+
+    <!-- material UI and google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/material-components-web.min.css') }}" />
+    <script src="{{ url_for('static', filename='js/material-components-web.min.js') }}"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" />
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script> -->
+
+    <!-- Mapbox -->
+    <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+
+    <!-- jquery -->
+    <script src='https://code.jquery.com/jquery-1.11.0.min.js'></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/cifunding_reset.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/cifunding_style.css') }}">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <div id="navbar" class="mdc-elevation--z3">
+            <a id="dcms-logo" href="https://www.gov.uk/government/organisations/department-for-digital-culture-media-sport/about/statistics">
+                <img src="https://raw.githubusercontent.com/DCMSstats/images/master/DCMS18_D-266x183.png">
+            </a>
+            <div id="header-text">Creative Industries Funding Map</div>
+        </div>
+
+        <div id="main">
+
+            <!-- <div>add demo gif of using tool - click on map, filter down to one time series to better view trend etc</div> -->
+            <div class="widget mdc-elevation--z1">
+                <h2>About</h2>
+                <p>
+                    This tool shows creative industries funding. To help ensure the information in this dashboard is transparent, the dashboard's <a href="https://github.com/DCMSstats/creative-industries-funding-map">source code</a> is <a href="https://www.gov.uk/service-manual/technology/making-source-code-open-and-reusable">open source</a> with an <a href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence</a>.
+
+                </p>
+                <h4>Data Sources</h4>
+                <p>The dashboard uses geojson map files from the <a href="http://geoportal.statistics.gov.uk/">ONS Geoportal</a>.
+                </p>
+            </div>
+
+
+            <div class="widget mdc-elevation--z1">
+                <h2>Map Creative Industries Funding</h2>
+                <div class="widget-graphic">
+                    <div id="map"></div>
+                    <div id='variables' class='menu-ui'></div>
+                </div>
+                <div class="source-links">
+                    <p>Source: Museums listed in <a href="https://www.gov.uk/government/statistical-data-sets/museums-and-galleries-monthly-visits">Monthly
+                            data</a></p>
+                </div>
+            </div>
+
+
+        </div>
+        <footer>
+            <p>Contact Details: For any queries please telephone 020 7211 6000 or email <a href="mailto:evidence@culture.gov.uk">evidence@culture.gov.uk</a>.</p>
+            <p>
+                <img src="https://raw.githubusercontent.com/DCMSstats/images/master/open-gov-licence.png">
+                All content is available under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open
+                    Government Licence v3.0</a> except where otherwise stated.
+            </p>
+        </footer>
+    </div>
+    <script>
+        var map_data = {{ map_data| tojson}};
+    </script>
+    <script src="{{ url_for('static',filename='js/cifunding_map.js') }}"></script>
+</body>
+
+</html>
